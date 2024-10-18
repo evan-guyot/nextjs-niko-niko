@@ -86,3 +86,34 @@ export async function getTodaysFeeling(): Promise<Mood | undefined> {
 
   return feeling ? feeling.mood : undefined;
 }
+
+export async function getCurrentMonthFeelings(): Promise<{ date: Date; mood: Mood }[] | undefined> {
+    const userId = await getUserId();
+
+    if (userId === -1) {
+        return undefined;
+    }
+
+    const currentDate = new Date();
+    const startOfMonth = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
+    const endOfMonth = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0); 
+
+    const feelings = await prisma.feeling.findMany({
+        where: {
+            userId: userId,
+            date: {
+                gte: startOfMonth,
+                lte: endOfMonth,
+            },
+        },
+        select: {
+            date: true,
+            mood: true,
+        },
+    });
+
+    return feelings.map(feeling => ({
+        date: feeling.date,
+        mood: feeling.mood,
+    }));
+}
