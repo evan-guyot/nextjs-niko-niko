@@ -24,7 +24,7 @@ export default function FeelingForm() {
         };
 
         fetchTodaysFeeling();
-    }, []); 
+    }, [form]); 
 
     const handleSubmit = async () => {
         setForm({ ...form, status: FormStatus.Loading });
