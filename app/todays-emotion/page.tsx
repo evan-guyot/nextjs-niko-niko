@@ -1,6 +1,6 @@
 import { RiEmotionHappyLine, RiEmotionNormalLine, RiEmotionUnhappyLine, RiSendPlaneFill } from "@remixicon/react";
 
-export default function TodaysEmotion() {
+export default async function TodaysEmotion() {    
     return <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
         <form>
             <p className="w-full text-center my-2">How do you feel today ?</p>
