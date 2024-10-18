@@ -33,7 +33,7 @@ export default function FeelingForm() {
             const formResponse = await addOrChangeFeeling(form);
 
             setForm(formResponse);
-        } catch (_) {
+        } catch {
             setForm({ ...form, status: FormStatus.Error, message: 'Submission failed. Please try again.' });
         }
     };
