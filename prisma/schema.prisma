@@ -12,4 +12,21 @@ model User {
   email        String   @unique
   image        String? 
   lastLoggedIn DateTime
+  feelings     Feeling[]
+}
+
+model Feeling {
+  id        Int       @id @default(autoincrement())
+  userId    Int
+  date      DateTime  @default(now())
+  mood      Mood
+  user      User      @relation(fields: [userId], references: [id])
+
+  @@unique([userId, date])
+}
+
+enum Mood {
+  HAPPY
+  NORMAL
+  SAD
 }
